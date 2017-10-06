@@ -94,7 +94,7 @@ Amid = ki.getProfile().mid
 
 Bots=[mid,Amid]
 admin=["u308205dd6abcc4bec5da585db20ab076"]
-AdminMid = cl.getProfile().mid
+AdminMid = cl.getProfile(admin)
 wait = {
     'contact':True,
     'autoJoin':True,
@@ -351,7 +351,8 @@ def bot(op):
 #----------Invite User Kick Start----------
         if op.type == 13:
             if wait["ProtectGuest"] == True:
-                if op.param2 not in admin and Bots:
+                if op.param2 not in admin:
+		  if op.param2 not in Bots:
                     random.choice(KAC).cancelGroupInvitation(op.param1,[op.param3])
                     random.choice(KAC).kickoutFromGroup(op.param1,[op.param2])
 #------------------------------------------
@@ -1300,10 +1301,9 @@ def bot(op):
                    else:
                        cl.sendText(msg.to,"Please turn on the name clock")
 
+            
             elif msg.text == "$set":
-                if msg.toType == 2:
-                    cl.sendText(msg.to, "Check sider")
-                    ki.sendText(msg.to, "Check sider")
+                    cl.sendText(msg.to, "Check sider")                 
                     try:
                         del wait2['readPoint'][msg.to]
                         del wait2['readMember'][msg.to]
@@ -1313,9 +1313,7 @@ def bot(op):
                     wait2['readMember'][msg.to] = ""
                     wait2['ROM'][msg.to] = {}
                     print wait2
-
             elif msg.text == "$read":
-                if msg.toType == 2:
                     if msg.to in wait2['readPoint']:
                         if wait2["ROM"][msg.to].items() == []:
                             chiya = ""
@@ -1328,7 +1326,6 @@ def bot(op):
                     else:
                         cl.sendText(msg.to, "An already read point has not been set.\n「set」you can send ♪ read point will be created ♪")
 #-----------------------------------------------
-
 #-----------------------------------------------
 
             elif msg.text in ["All join"]:
@@ -1613,7 +1610,7 @@ def bot(op):
                                 ki.sendText(msg.to,"Succes Bro!")
 #-----------------------------------------------
             elif msg.text in ["On Bot","On bot"]:
-                ki.sendText(msg.to,"On Bos  􀨁􀄻double thumbs up􏿿 􀜁􀅔Har Har�")
+                ki.sendText(msg.to,"On Bos  􀨁􀄻double thumbs up􏿿")
 #-----------------------------------------------
             elif msg.text in ["wc","Wc","wc"]:
                 ginfo = cl.getGroup(msg.to)
@@ -1739,18 +1736,16 @@ def bot(op):
                      wait["dblacklist"] = True
                      cl.sendText(msg.to,"send contact")
                      ki.sendText(msg.to,"send contact")
-            elif msg.text in ["List Catatan"]:
-                if msg.toType == 2:
-                  if wait["blacklist"] == {}:
-                      cl.sendText(msg.to,"nothing")
-                      ki.sendText(msg.to,"Tak ada siapapun bos.")
+	      elif msg.text in ["Banlist"]:
+                if wait["blacklist"] == {}:
+                    cl.sendText(msg.to,"nothing")
                 else:
                     cl.sendText(msg.to,"Blacklist user")
                     mc = ""
                     for mi_d in wait["blacklist"]:
                         mc += "->" +cl.getContact(mi_d).displayName + "\n"
-                    ki.sendText(msg.to,mc)
-            elif msg.text in ["Cek Catatan"]:
+                    cl.sendText(msg.to,mc)
+            elif msg.text in ["Cek ban"]:
                 if msg.toType == 2:
                     group = cl.getGroup(msg.to)
                     gMembMids = [contact.mid for contact in group.members]
@@ -1759,9 +1754,9 @@ def bot(op):
                         matched_list+=filter(lambda str: str == tag, gMembMids)
                     cocoa = ""
                     for mm in matched_list:
-                        cocoa += mm +cl.getContact(mi_d).displayName + "\n"
-                    cl.sendText(msg.to,cocoa + "")
-            elif msg.text in ["Kick catatan"]:
+                        cocoa += mm + "\n"
+		    cl.sendText(msg.to,cocoa + "")
+	    elif msg.text in ["Kick catatan"]:
                 if msg.from_ in admin:
                     group = cl.getGroup(msg.to)
                     gMembMids = [contact.mid for contact in group.members]
