@@ -21,9 +21,9 @@ ar = LINETCR.LINE()
 ar.login(token="ElxRKwnZI1ClB9QFbZac.GeBvu6aiiktEKuWvEKqxNa.jPGpnz5Z8lfqtQvMswxF8XdYhRLGksdx/0Zsnu1v9bc=")
 ar.loginResult()
 
-#pi = LINETCR.LINE()
-#pi.login(qr=True)
-#pi.loginResult()
+pi = LINETCR.LINE()
+pi.login(qr=True)
+pi.loginResult()
 
 
 print "login success"
@@ -105,11 +105,11 @@ mid = cl.getProfile().mid
 Amid = ki.getProfile().mid
 Bmid = kk.getProfile().mid
 Cmid = ar.getProfile().mid
-#Dmid = pi.getProfile().mid
+Dmid = pi.getProfile().mid
 
 Bots=[mid,Amid,Bmid,Cmid]
 profile = cl.getProfile()
-admin=["u308205dd6abcc4bec5da585db20ab076","u1c603c6d6eb3a3cc756da5b61f2a6347","u8fc8e4618a0714dee388d87bca9f12f3","u598c9af01812e7c2e8583091c6746230","u8046d553a00820a4de914c157a44179c"]
+admin=["ua900e1ba4a91a01b7de658f26471c510","u308205dd6abcc4bec5da585db20ab076","u1c603c6d6eb3a3cc756da5b61f2a6347","u8fc8e4618a0714dee388d87bca9f12f3","u598c9af01812e7c2e8583091c6746230","u8046d553a00820a4de914c157a44179c"]
 wait = {
     'contact':True,
     'autoJoin':True,
@@ -201,7 +201,7 @@ def sendMessage(to, text, contentMetadata={}, contentType=0):
     messageReq[to] += 1
 
 def NOTIFIED_ACCEPT_GROUP_INVITATION(op):
-    #print op
+    print op
     try:
         cl.sendText(op.param1, cl.getContact(op.param2).displayName + "Selamat Datang😊\n " + group.name + "Salam Kenal Bro!")
     except Exception as e:
@@ -282,16 +282,16 @@ def bot(op):
                         ar.updateGroup(X)
                         Ti = ar.reissueGroupTicket(op.param1)
 
-#                if op.param3 in Bmid:
-#                   if op.param2 in Cmid:
-#                       X = pi.getGroup(op.param1)
-#                       X.preventJoinByTicket = False
-#                       pi.updateGroup(X)
-#                       Ti = pi.reissueGroupTicket(op.param1)
-#                       ar.acceptGroupInvitationByTicket(op.param1,Ti)
-#                       X.preventJoinByTicket = True
-#                       pi.updateGroup(X)
-#                       Ti = pi.reissueGroupTicket(op.param1)
+                if op.param3 in Bmid:
+                   if op.param2 in Cmid:
+                       X = pi.getGroup(op.param1)
+                       X.preventJoinByTicket = False
+                       pi.updateGroup(X)
+                       Ti = pi.reissueGroupTicket(op.param1)
+                       ar.acceptGroupInvitationByTicket(op.param1,Ti)
+                       X.preventJoinByTicket = True
+                       pi.updateGroup(X)
+                       Ti = pi.reissueGroupTicket(op.param1)
 
         if op.type == 13:
             print op.param1
@@ -454,7 +454,8 @@ def bot(op):
                         pass
                     else:
                         wait["blacklist"][op.param2] = True
-#----------Open Qr Kick Start----------
+			
+  	Open Qr Kick Start
         if op.type == 11:
             if wait["ProtectQr"] == True:
                 if op.param2 not in admin:
@@ -463,19 +464,19 @@ def bot(op):
                     G.preventJoinByTicket = True
                     random.choice(KAC).kickoutFromGroup(op.param1,[op.param2])
                     random.choice(KAC).updateGroup(G)
-#--------------------------------------
-#----------Invite User Kick Start----------
+
+Invite User Kick Start
         if op.type == 13:
             if wait["ProtectGuest"] == True:
                 if op.param2 not in admin and Bots:
                     random.choice(KAC).cancelGroupInvitation(op.param1,[op.param3])
                     random.choice(KAC).kickoutFromGroup(op.param1,[op.param2])
-#------------------------------------------
+
         if op.type == 32:
                 if op.param2 not in admin and Bots:
                     random.choice(KAC).inviteIntoGroup(op.param1,[op.param3])
                     random.choice(KAC).kickoutFromGroup(op.param1,[op.param2])
-#------------------------------------------
+
         if op.type == 13:
             if mid in op.param3:
                 G = cl.getGroup(op.param1)
@@ -794,9 +795,9 @@ def bot(op):
                         ki.sendText(msg.to,"Harap segera hubungi Si Creator!")
                     else:
                         ki.sendText(msg.to,"Not for use less than group")
-            #elif "gurl" == msg.text:
-                #print cl.getGroup(msg.to)
-                ##cl.sendMessage(msg)
+            elif "gurl" == msg.text:
+                print cl.getGroup(msg.to)
+                cl.sendMessage(msg)
             elif msg.text in ["Ourl","Link on"]:
                 if msg.from_ in admin:
                     X = cl.getGroup(msg.to)
@@ -942,7 +943,7 @@ def bot(op):
                            h += "[%s]\n -+GroupID :" +  "%s\n -+TotalMembers :" + "%s\n -+MembersPending :" +  "%s\n -+Creator : %s\n" % (cl.getGroup(i).name,i,str(cl.getGroup(i).members),cl.getGroup(i).invite,cl.getGroup(i).creator.displayName)
                        cl.sendText(msg.to,h + "|[Total Group]| : " + str(len(gid)))
 
-        #-------------Fungsi Creator Start-----------------#
+        Fungsi Creator Start
             elif msg.text in ["Bot Creator"]:
                 if msg.toType == 2:
                       msg.contentType = 13
@@ -953,8 +954,6 @@ def bot(op):
                           Creatorbot = "Error"
                       cl.sendText(msg.to, "My Creator : Ari.")
                       cl.sendMessage(msg)
-
-#-----------------------------------------
 
             elif "Copy @" in msg.text:
                 if msg.from_ in admin:
@@ -975,8 +974,6 @@ def bot(op):
                                 cl.sendMessage(msg.to, "Succes Copy profile")
                              except Exception as e:
                                  print error
-
-#-----------------------------------------
 
             elif "Spamg " in msg.text:
                if msg.from_ in admin:
@@ -1016,8 +1013,6 @@ def bot(op):
                     else:
                         ki.sendText(msg.to, "Kelebihan batas :v")
 
-#-----------------------------------------
-
             elif msg.text in ["bot out"]:
                 if msg.from_ in admin:
                    gid = cl.getGroupIdsJoined()
@@ -1033,8 +1028,7 @@ def bot(op):
                    else:
                        cl.sendText(msg.to,"He declined all invitations")
 
-        #-------------Fungsi Creator Finish-----------------#
-
+        Fungsi Creator Finish
             elif msg.text in ["Gcreator:inv"]:
                 if msg.from_ in admin:
                    ginfo = cl.getGroup(msg.to)
@@ -1691,7 +1685,7 @@ def bot(op):
                         cl.sendText(msg.to, "People who readed %s\nthat's it\n\nPeople who have ignored reads\n%sIt is abnormal ♪\n\nReading point creation date n time:\n[%s]"  % (wait2['readMember'][msg.to],chiya,setTime[msg.to]))
                     else:
                         cl.sendText(msg.to, "An already read point has not been set.\n「set」you can send ♪ read point will be created ♪")
-#-----------------------------------------------
+
             elif "Bcc: " in msg.text:
                 if msg.from_ in admin:
                      broadcasttxt = msg.text.replace("Bcc: ", "")
@@ -1719,8 +1713,6 @@ def bot(op):
                     t = cl.getAllContactIds()
                     for manusia in t:
                          cl.sendText(manusia, (bctxt))
-
-#-----------------------------------------------
 
             elif msg.text in ["All join","All Join"]:
                 if msg.from_ in admin:
@@ -1769,8 +1761,7 @@ def bot(op):
                      cl.updateGroup(G)
                      Ticket = ki.reissueGroupTicket(msg.to)
 
-#-----------------------------------------------
-#.acceptGroupInvitationByTicket(msg.to,Ticket)
+acceptGroupInvitationByTicket(msg.to,Ticket)
             elif msg.text in ["Cv3 join"]:
                         G = cl.getGroup(msg.to)
                         ginfo = cl.getGroup(msg.to)
@@ -1782,9 +1773,6 @@ def bot(op):
                         print "kicker ok"
                         G.preventJoinByTicket = True
                         ki.updateGroup(G)
-
-
-#-----------------------------------------------
 
             elif msg.text in ["Bye bot","Bye 69"]:
                 if msg.from_ in admin:
@@ -1846,8 +1834,7 @@ def bot(op):
                     kc.sendText(msg.to,"Admin permission required.")
                     print "[Error]Command denied - Admin permission required"
 
-#-----------------------------------------------
-            elif msg.text in["@tag"]:
+          elif msg.text in["@tag"]:
                 group = cl.getGroup(msg.to)
                 nama = [contact.mid for contact in group.members]
                 nm1, nm2, nm3, jml = [], [], [], len(nama)
@@ -1876,8 +1863,8 @@ def bot(op):
                 cnt.text = "Done:"+str(jml)
                 cont.to = msg.to
                 cl.sendMessage(cnt)
-#-----------------------------------------------
-            elif msg.text in ["Summon"]:
+
+          elif msg.text in ["Summon"]:
                 group = cl.getGroup(msg.to)
                 nama = [contact.mid for contact in group.members]
                 cb = ""
@@ -1899,7 +1886,7 @@ def bot(op):
                 except Exception as error:
                     print error
 
-            elif msg.text in ["tag all"]:
+          elif msg.text in ["tag all"]:
                 group = cl.getGroup(msg.to)
                 nama = [contact.mid for contact in group.members]
                 aa = ""
@@ -1926,7 +1913,7 @@ def bot(op):
                 except Exception as error:
                     print error
 
-            elif msg.text in ["Ar Tagall", "Ar tagall"]:
+          elif msg.text in ["Ar Tagall", "Ar tagall"]:
                 group = cl.getGroup(msg.to)
                 msg_appended = ""
                 strt = int(0)
@@ -1955,7 +1942,6 @@ def bot(op):
                     else:
                         print "No Action"
 
-#-----------------------------------------------
             if msg.text in ["Kill"]:
                 if msg.from_ in admin:
                     group = ki.getGroup(msg.to)
@@ -2093,85 +2079,76 @@ def bot(op):
                             except:
                                 ki.sendText(msg.to,"Succes Bro!")
 
-            elif msg.text in ["Fuck","fuck","Kontol","kontol"]:
+           elif msg.text in ["Fuck","fuck","Kontol","kontol"]:
                 if op.param2 not in admin:
                     print receiver
                     random.choice(KAC).kickoutFromGroup(op.param1,[op.param2])
 
-#-----------------------------------------------
-            elif msg.text in ["On Bot","On bot"]:
+           elif msg.text in ["On Bot","On bot"]:
                 cl.sendText(msg.to,"On Bos  􀨁􀄻double thumbs up􏿿")
-            elif msg.text in ["Test","test"]:
+           elif msg.text in ["Test","test"]:
                 cl.sendText(msg.to,"Lulus")
-            elif msg.text in ["Tes","tes"]:
+           elif msg.text in ["Tes","tes"]:
                 cl.sendText(msg.to,"Tis")
-            elif msg.text in ["Tis","tis"]:
-                cl.sendText(msg.to,"Dih doyan biji\nCiri khas Pedo nih")
-#-----------------------------------------------
-            elif msg.text in ["wc","Wc","wc"]:
+           elif msg.text in ["Tis","tis"]:
+                cl.sendText(msg.to,"Dih doyan biji\nCiri")
+           elif msg.text in ["wc","Wc","wc"]:
                 ginfo = cl.getGroup(msg.to)
                 cl.sendText(msg.to,"Selamat Datang Guys Di " + str(ginfo.name))
                 cl.sendText(msg.to,"Owner " + str(ginfo.name) + " :\n=>" + ginfo.creator.displayName )
-
-#-----------------------------------------------
-            elif "Say " in msg.text:
+           elif "Say " in msg.text:
                 if msg.toType == 2:
                 	bctxt = msg.text.replace("Say ","")
 	        	cl.sendText(msg.to,(bctxt))
 			ki.sendText(msg.to,(bctxt))
-#-----------------------------------------------
-
-            elif msg.text in ["ArHar say hi"]:
+           elif msg.text in ["ArHar say hi"]:
                 cl.sendText(msg.to,"Hi  􀜁􀅔Har Har􏿿")
-#-----------------------------------------------
-
-            elif msg.text in ["ArHar say hinata pekok"]:
+           elif msg.text in ["ArHar say hinata pekok"]:
                 ki.sendText(msg.to,"Hinata pekok 􀜁􀅔Har Har􏿿")
-            elif msg.text in ["ArHar say didik pekok"]:
+           elif msg.text in ["ArHar say didik pekok"]:
                 ki.sendText(msg.to,"Didik pekok 􀜁􀅔Har Har􏿿")
-            elif msg.text in ["ArHar say bobo ah","Bobo dulu ah"]:
+           elif msg.text in ["ArHar say bobo ah","Bobo dulu ah"]:
                 ki.sendText(msg.to,"Have a nice dream Cv 􀜁􀅔Har Har􏿿")
-            elif msg.text in ["ArHar say chomel pekok"]:
+           elif msg.text in ["ArHar say chomel pekok"]:
                 ki.sendText(msg.to,"Chomel pekok 􀜁􀅔Har Har􏿿")
-            elif msg.text in ["#welcome"]:
+           elif msg.text in ["#welcome"]:
                 ki.sendText(msg.to,"Selamat datang di Localhost@Tersakiti Family Room")
                 ki.sendText(msg.to,"Jangan nakal ok!")
-            elif msg.text in ["AKU","Aku","aku","Aku?","aku?"]:
+           elif msg.text in ["AKU","Aku","aku","Aku?","aku?"]:
                 ki.sendText(msg.to,"Iya sayang")
                 ki.sendText(msg.to,"Kamu doank")
                 ki.sendText(msg.to,"Muacchh..♡♡♡")
-            elif msg.text in ["Ban","ban","BAN","Banned"]:
+           elif msg.text in ["Ban","ban","BAN","Banned"]:
                 cl.sendText(msg.to,"Mau nge Ban?")
                 ki.sendText(msg.to,"Bikin bot sendiri!")
                 ki.sendText(msg.to,"Dasar Ndeso!")
-            elif msg.text in ["Saran Keyword"]:
+           elif msg.text in ["Saran Keyword"]:
                 cl.sendText(msg.to,"Mau kirim saran keyword?")
                 ki.sendText(msg.to,"Kirim langsung aja ke Bang Ar(Si Creator) \nDengan mengisi format dibawah👇")
                 ki.sendText(msg.to,"Saran keyword:\n\nQ:...[diisi]\nA:...[diisi]\nA:...[boleh diisi jika jawaban A ada lanjutannya]\nJumlah jawaban A:...[diisi]\n\n\nKirim langsung ke Bang Ar, tunggu beberapa hari dan saranmu akan masuk ke list keyword\n\n\nIsilah saranmu dengan sekreatif mungkin, tetapi yang wajar.")
-            elif msg.text in ["Unicodes"]:
+           elif msg.text in ["Unicodes"]:
                 cl.sendText(msg.to,"Harap berhati-hati")
                 ki.sendText(msg.to,"4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.4.0.4.er.")
-            elif msg.text in ["hust","hus","Hust","Hus","Husst","husst","husss"]:
+           elif msg.text in ["hust","hus","Hust","Hus","Husst","husst","husss"]:
                 ki.sendText(msg.to,"Meong 🐈")
-            elif msg.text in ["ah","Ah","Argh","argh","akh","Akh","aah","Aah"]:
+           elif msg.text in ["ah","Ah","Argh","argh","akh","Akh","aah","Aah"]:
                 cl.sendText(msg.to,"Ih")
                 ki.sendText(msg.to,"Uh")
                 cl.sendText(msg.to,"Eh")
                 ki.sendText(msg.to,"Oh")
-            elif msg.text in ["Hai","hai","haii","Haii"]:
+           elif msg.text in ["Hai","hai","haii","Haii"]:
                 ki.sendText(msg.to,"Hai juga sayang 😘")
-#-----------------------------------------------
-            elif msg.text in ["Siapa Aku?","Siapa aku?","siapa aku?","Siapa aku","Siapa Aku"]:
+           elif msg.text in ["Siapa Aku?","Siapa aku?","siapa aku?","Siapa aku","Siapa Aku"]:
                 answ = ['Ente Manusie','You are the lazy human','Kamu adalah seorang anak dari 2 orang tua','Elo manusia oon','Aku? Jadi duta micin lain? Ahahaha','Orang','Manusia','Setan','Juragan Micin']
                 psn = random.choice(answ)
                 cl.sendText(msg.to,psn)
 
-            elif msg.text in ["Quote","quote","quotes","Quotes"]:
+           elif msg.text in ["Quote","quote","quotes","Quotes"]:
                 quote = ['Barangsiapa yang suka meninggalkan barang di tempat umum maka ia akan kehilangan barangnya tersebut\n\nQuote By Ari.','Kunci KESUKSESAN itu cuma satu, yakni lu harus BERHASIL.\n\nQuote By Ari.','Sebaik-baik orang memberi lebih baik ditabung\n\nQuote By Ari.','Lebih baik tangan diatas dari pada tangan di dalam celana\n\nQuote By Ari.']
                 psn = random.choice(quote)
                 cl.sendText(msg.to,psn)
 
-            elif msg.text in ["Apakah Saya Ganteng?","Apakah saya ganteng?","apakah saya ganteng?"]:
+           elif msg.text in ["Apakah Saya Ganteng?","Apakah saya ganteng?","apakah saya ganteng?"]:
                 aw1 = ["Ya, anda ganteng"]
                 aw2 = ["Ya, kamu ganteng"]
                 aw3 = ["Tidak, anda jelek"]
@@ -2180,26 +2157,23 @@ def bot(op):
                 nan0 = [aw1,aw2,aw3,aw4,aw5]
                 psn = random.choice(nan0)
                 cl.sendText(msg.to,psn)
-
-
-#-----------------------------------------------
-            elif msg.text in ["Eh","eh","EH"]:
+          elif msg.text in ["Eh","eh","EH"]:
                 ki.sendText(msg.to,"Apa eh???")
-            elif msg.text in ["Sayang","sayang","ayang","Ayang"]:
+          elif msg.text in ["Sayang","sayang","ayang","Ayang"]:
                 ki.sendText(msg.to,"Iya sayang")
-            elif msg.text in ["Spam"]:
+          elif msg.text in ["Spam"]:
                 ki.sendText(msg.to,"Yang spam mah kick aja")
-            elif msg.text in ["p"]:
+          elif msg.text in ["p"]:
                 cl.sendText(msg.to,"ler")
-            elif msg.text in ["P"]:
+          elif msg.text in ["P"]:
                 cl.sendText(msg.to,"Ler...")
-            elif msg.text in ["PING","Ping","ping"]:
+          elif msg.text in ["PING","Ping","ping"]:
                 ki.sendText(msg.to,"PONG 􀨁􀄻double thumbs up􏿿􀜁􀅔Har Har􏿿")
-            elif msg.text in ["...","..",".","Hh","hhh","hh","hhhhh"]:
+          elif msg.text in ["...","..",".","Hh","hhh","hh","hhhhh"]:
                 ki.sendText(msg.to,"Galau? Minum baygon aja :v")
-            elif msg.text in [":v"]:
+          elif msg.text in [":v"]:
                 ki.sendText(msg.to,"Ketawa bang?")
-            elif msg.text in ["Laper","laper","Laver","laver"]:
+          elif msg.text in ["Laper","laper","Laver","laver"]:
                 ki.sendText(msg.to,"Makan bang")
             elif msg.text in ["Hallo","hallo","Halo","halo","Alo","alo","Aloo","aloo"]:
                 ki.sendText(msg.to,"Ya, ada yang bisa ArQyu bantu?")
@@ -2231,42 +2205,35 @@ def bot(op):
             elif msg.text in ["/join","/Join"]:
                 ki.sendText(msg.to,"Ini bukan bot WW")
                 ki.sendText(msg.to,"ini bot ArQyu")
-
-#-----------------------------------------------
-
-            elif msg.text in ["ArHar","arhar"]:
+           elif msg.text in ["ArHar","arhar"]:
                 ki.sendText(msg.to,"Hadir✋􀜁􀅔Har Har�")
-#-----------------------------------------------
-
-            elif msg.text in ["Sp","Speed","speed"]:
+           elif msg.text in ["Sp","Speed","speed"]:
                 start = time.time()
                 cl.sendText(msg.to, "Loading...")
                 elapsed_time = time.time() - start
                 ki.sendText(msg.to, "%sseconds" % (elapsed_time))
-
-#------------------------------------------------------------------
-            elif msg.text in ["Catat"]:
+           elif msg.text in ["Catat"]:
                 if msg.from_ in admin:
                      wait["wblacklist"] = True
                      cl.sendText(msg.to,"send contact")
                      ki.sendText(msg.to,"send contact")
-            elif msg.text in ["Uncatat"]:
+           elif msg.text in ["Uncatat"]:
                 if msg.from_ in admin:
                      wait["dblacklist"] = True
                      cl.sendText(msg.to,"send contact")
                      ki.sendText(msg.to,"send contact")
-            elif msg.text in ["List Catatan"]:
+           elif msg.text in ["List Catatan"]:
                 if msg.toType == 2:
                   if wait["blacklist"] == {}:
                       cl.sendText(msg.to,"nothing")
                       ki.sendText(msg.to,"Tak ada siapapun bos.")
-                else:
+               else:
                     cl.sendText(msg.to,"Blacklist user")
                     mc = ""
                     for mi_d in wait["blacklist"]:
                         mc += "->" +cl.getContact(mi_d).displayName + "\n"
                     ki.sendText(msg.to,mc)
-            elif msg.text in ["Ar Banlist","Ar banlist"]:
+           elif msg.text in ["Ar Banlist","Ar banlist"]:
                 if wait["blacklist"] == {}:
                     cl.sendText(msg.to,"No user is Blacklisted")
                 else:
@@ -2276,7 +2243,7 @@ def bot(op):
                         mc += "->" +cl.getContact(mi_d).displayName + "\n"
                     cl.sendText(msg.to,mc)
                     print "[Command]Banlist executed"
-            elif msg.text in ["Cek Catatan"]:
+           elif msg.text in ["Cek Catatan"]:
                 if msg.toType == 2:
                     group = cl.getGroup(msg.to)
                     gMembMids = [contact.mid for contact in group.members]
@@ -2287,7 +2254,7 @@ def bot(op):
                     for mm in matched_list:
                         cocoa += mm +cl.getContact(mi_d).displayName + "\n"
                     cl.sendText(msg.to,cocoa + "")
-            elif msg.text in ["Kick catatan"]:
+           elif msg.text in ["Kick catatan"]:
                 if msg.from_ in admin:
                     group = cl.getGroup(msg.to)
                     gMembMids = [contact.mid for contact in group.members]
