@@ -110,7 +110,7 @@ Dmid = pi.getProfile().mid
 
 Bots=[mid,Amid,Bmid,Cmid,Dmid]
 profile = cl.getProfile()
-admin=["u308205dd6abcc4bec5da585db20ab076","ue470aef22fbf0ba95ac4552256ed4623","u4ba61bbd00866afd8cc18dedc00b7a5f","u6893fae63b46f83b9a32c21d219c90f1"]
+admin=["ua900e1ba4a91a01b7de658f26471c510","ue470aef22fbf0ba95ac4552256ed4623","u4ba61bbd00866afd8cc18dedc00b7a5f","u6893fae63b46f83b9a32c21d219c90f1"]
 wait = {
     'contact':True,
     'autoJoin':True,
@@ -126,7 +126,7 @@ wait = {
     "wblack":True,
     "dblack":True,
     "clock":False,
-    "cName":"Ar-Har",
+    "cName":"NAZUWA",
     "blacklist":{},
     "wblacklist":True,
     "dblacklist":True,
