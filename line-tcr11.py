@@ -21,9 +21,9 @@ ar = LINETCR.LINE()
 ar.login(token="ElxRKwnZI1ClB9QFbZac.GeBvu6aiiktEKuWvEKqxNa.jPGpnz5Z8lfqtQvMswxF8XdYhRLGksdx/0Zsnu1v9bc=")
 ar.loginResult()
 
-#pi = LINETCR.LINE()
-#pi.login(qr=True)
-#pi.loginResult()
+pi = LINETCR.LINE()
+pi.login(qr=True)
+pi.loginResult()
 
 
 print "login success"
@@ -175,8 +175,8 @@ def upload_tempimage(client):
         Upload a picture of a kitten. We don't ship one, so get creative!
     '''
 
-    # Here's the metadata for the upload. All of these are optional, including
-    # this config dict itself.
+     Here's the metadata for the upload. All of these are optional, including
+     this config dict itself.
     config = {
         'album': album,
         'name':  'bot auto upload',
@@ -201,7 +201,7 @@ def sendMessage(to, text, contentMetadata={}, contentType=0):
     messageReq[to] += 1
 
 def NOTIFIED_ACCEPT_GROUP_INVITATION(op):
-    #print op
+    print op
     try:
         cl.sendText(op.param1, cl.getContact(op.param2).displayName + "Selamat Datang😊\n " + group.name + "Salam Kenal Bro!")
     except Exception as e:
@@ -282,16 +282,16 @@ def bot(op):
                         ar.updateGroup(X)
                         Ti = ar.reissueGroupTicket(op.param1)
 
-#                if op.param3 in Bmid:
-#                   if op.param2 in Cmid:
-#                       X = pi.getGroup(op.param1)
-#                       X.preventJoinByTicket = False
-#                       pi.updateGroup(X)
-#                       Ti = pi.reissueGroupTicket(op.param1)
-#                       ar.acceptGroupInvitationByTicket(op.param1,Ti)
-#                       X.preventJoinByTicket = True
-#                       pi.updateGroup(X)
-#                       Ti = pi.reissueGroupTicket(op.param1)
+                if op.param3 in Bmid:
+                   if op.param2 in Cmid:
+                       X = pi.getGroup(op.param1)
+                       X.preventJoinByTicket = False
+                       pi.updateGroup(X)
+                       Ti = pi.reissueGroupTicket(op.param1)
+                       ar.acceptGroupInvitationByTicket(op.param1,Ti)
+                       X.preventJoinByTicket = True
+                       pi.updateGroup(X)
+                       Ti = pi.reissueGroupTicket(op.param1)
 
         if op.type == 13:
             print op.param1
