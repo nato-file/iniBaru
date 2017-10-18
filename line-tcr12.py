@@ -21,9 +21,9 @@ ar = LINETCR.LINE()
 ar.login(token="ElUSGFUMaZTMbRmbv8dc.GeBvu6aiiktEKuWvEKqxNa.+crtKcUvTuk3x7VlS3Ew9OXhGH3p0OL3N8gCRKgHOxo=")
 ar.loginResult()
 
-#pi = LINETCR.LINE()
-#pi.login(qr=True)
-#pi.loginResult()
+pi = LINETCR.LINE()
+pi.login(qr=True)
+pi.loginResult()
 
 
 print "login success"
